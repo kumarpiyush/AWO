@@ -19,7 +19,7 @@ public class LoginAuthorizationActivity extends AppCompatActivity {
 
     public void startAuthorization(View view) {
         try {
-            String url = OwaAuth.buildAuthenticationUrl();
+            String url = OwaAuth.buildAuthorizationUrl();
 
             Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(url));
             startActivity(intent);
