@@ -1,4 +1,4 @@
-package github.kumarpiyush.awo;
+package github.kumarpiyush.awo.Helpers;
 
 import android.net.Uri;
 
@@ -13,22 +13,23 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import github.kumarpiyush.awo.Constants;
 import github.kumarpiyush.awo.Contracts.AppCredentials;
 import github.kumarpiyush.awo.Contracts.AuthenticationResponse;
 
-public class OwaAuth {
+public class OwaHelpers {
     public static String buildAuthorizationUrl() throws Exception {
         String parameters = "response_type=code" +
-                "&client_id=" + Constants.Owa.ClientId +
-                "&redirect_uri=" + URLEncoder.encode(Constants.Owa.RedirectUrl, "UTF-8") +
-                "&scope=" + URLEncoder.encode(Constants.Owa.Scope, "UTF-8") +
+                "&client_id=" + Constants.Owa.clientId +
+                "&redirect_uri=" + URLEncoder.encode(Constants.Owa.redirectUrl, "UTF-8") +
+                "&scope=" + URLEncoder.encode(Constants.Owa.scope, "UTF-8") +
                 "&prompt=login";
 
-        return Constants.Owa.AuthorizationUrl + "?" + parameters;
+        return Constants.Owa.authorizationUrl + "?" + parameters;
     }
 
     public static AuthenticationResponse authenticateAndGetRefreshToken(String authorizationCode, AppCredentials appCredentials) throws Exception {
-        URL tokenEndpoint = new URL(Constants.Owa.TokenUrl);
+        URL tokenEndpoint = new URL(Constants.Owa.tokenUrl);
         HttpURLConnection connection = (HttpURLConnection) tokenEndpoint.openConnection();
 
         connection.setRequestMethod("POST");
@@ -50,8 +51,8 @@ public class OwaAuth {
         Uri.Builder builder = new Uri.Builder()
                 .appendQueryParameter("grant_type", "authorization_code")
                 .appendQueryParameter("code", authorizationCode)
-                .appendQueryParameter("scope", Constants.Owa.Scope)
-                .appendQueryParameter("redirect_uri", Constants.Owa.RedirectUrl)
+                .appendQueryParameter("scope", Constants.Owa.scope)
+                .appendQueryParameter("redirect_uri", Constants.Owa.redirectUrl)
                 .appendQueryParameter("client_id", appCredentials.AppId)
                 .appendQueryParameter("client_secret", appCredentials.AppSecret);
 

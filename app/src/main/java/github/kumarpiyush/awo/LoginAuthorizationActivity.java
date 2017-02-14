@@ -4,8 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+
+import github.kumarpiyush.awo.Helpers.OwaHelpers;
 
 public class LoginAuthorizationActivity extends AppCompatActivity {
 
@@ -19,13 +20,14 @@ public class LoginAuthorizationActivity extends AppCompatActivity {
 
     public void startAuthorization(View view) {
         try {
-            String url = OwaAuth.buildAuthorizationUrl();
+            String url = OwaHelpers.buildAuthorizationUrl();
 
             Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(url));
             startActivity(intent);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Intent errorIntent = new Intent(this, ErrorDisplayActivity.class);
-            errorIntent.putExtra(Constants.ErrorDisplayMessageKey, e.toString());
+            errorIntent.putExtra(Constants.errorDisplayMessageKey, e.toString());
 
             startActivity(errorIntent);
         }

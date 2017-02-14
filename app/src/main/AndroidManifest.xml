@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="github.kumarpiyush.awo">
 
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -32,6 +34,15 @@
         </activity>
         <activity android:name=".ErrorDisplayActivity">
         </activity>
-    </application>
 
+        <service
+            android:name="github.kumarpiyush.awo.AccountService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator"/>
+        </service>
+    </application>
 </manifest>

@@ -15,7 +15,7 @@ public class ErrorDisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_error_display);
 
         Intent callingIntent = getIntent();
-        String errorMessage = callingIntent.getStringExtra(Constants.ErrorDisplayMessageKey);
+        String errorMessage = callingIntent.getStringExtra(Constants.errorDisplayMessageKey);
 
         TextView errorView = new TextView(this);
         errorView.setText(errorMessage);
