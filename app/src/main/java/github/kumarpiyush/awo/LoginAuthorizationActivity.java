@@ -24,7 +24,10 @@ public class LoginAuthorizationActivity extends AppCompatActivity {
             Intent intent = new Intent("android.intent.action.VIEW", Uri.parse(url));
             startActivity(intent);
         } catch (Exception e) {
-            Log.e("LoginAuthorization", e.toString());
+            Intent errorIntent = new Intent(this, ErrorDisplayActivity.class);
+            errorIntent.putExtra(Constants.ErrorDisplayMessageKey, e.toString());
+
+            startActivity(errorIntent);
         }
     }
 }

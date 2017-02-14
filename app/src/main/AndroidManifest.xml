@@ -20,13 +20,17 @@
         <activity android:name=".LoginAuthorizationActivity"/>
         <activity android:name=".LoginAuthenticationActivity">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
-                <category android:name="android.intent.category.BROWSABLE"></category>
-                <data android:host="localhost"></data>
-                <data android:scheme="http"></data>
-                <data android:pathPattern="/awo/.*"></data>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:host="localhost"/>
+                <data android:scheme="http"/>
+                <data android:pathPattern="/awo/.*"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".ErrorDisplayActivity">
         </activity>
     </application>
 

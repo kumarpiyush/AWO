@@ -10,4 +10,6 @@ public class Constants {
         public static final String AuthorizationUrl = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
         public static final String TokenUrl = "https://login.microsoftonline.com/common/oauth2/v2.0/token";
     }
+
+    public static final String ErrorDisplayMessageKey = "ErrorDisplayMessage";
 }
