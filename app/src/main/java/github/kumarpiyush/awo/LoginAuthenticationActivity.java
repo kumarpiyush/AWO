@@ -27,8 +27,8 @@ public class LoginAuthenticationActivity extends AppCompatActivity {
 
         try {
             AuthenticationResponse response = OwaAuth.authenticateAndGetRefreshToken(authorizationCode, new AppCredentials(Constants.Owa.ClientId, getString(R.string.app_secret)));
-            String test = response.response;
-            // TODO : save the refresh token
+
+            // Save the refresh token
         } catch (Exception e) {
             Log.e("LoginAuthentication", e.toString());
         }

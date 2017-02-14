@@ -2,6 +2,8 @@ package github.kumarpiyush.awo;
 
 import android.net.Uri;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -36,8 +38,11 @@ public class OwaAuth {
 
         String response = getAuthenticationResponseFromUrlConnection(connection);
 
+        JSONObject parsedResponse = new JSONObject(response);
+        String refreshToken = parsedResponse.getString("refresh_token");
+
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-        authenticationResponse.response = response;
+        authenticationResponse.refreshToken = refreshToken;
         return authenticationResponse;
     }
 
