@@ -12,6 +12,7 @@ import github.kumarpiyush.awo.Contracts.AppCredentials;
 import github.kumarpiyush.awo.Contracts.AuthenticationResponse;
 import github.kumarpiyush.awo.Helpers.OwaHelpers;
 
+// Trades OWA OAuth authorization token with authentication/refresh token
 public class LoginAuthenticationActivity extends AppCompatActivity {
 
     @Override

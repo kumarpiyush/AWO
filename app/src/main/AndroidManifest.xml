@@ -35,14 +35,24 @@
         <activity android:name=".ErrorDisplayActivity">
         </activity>
 
-        <service
-            android:name="github.kumarpiyush.awo.AccountService">
+        <service android:name=".AccountService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator"/>
             </intent-filter>
+
             <meta-data
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator"/>
         </service>
+
+        <activity android:name=".SyncScheduleActivity">
+        </activity>
+
+        <receiver
+            android:name=".SyncEventReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
     </application>
+
 </manifest>

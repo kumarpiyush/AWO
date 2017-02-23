@@ -18,12 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (isUserLoggedIn()) {
-            // TODO : navigate to email display activity
-
-            // Hijack error intent to display success
-            Intent errorIntent = new Intent(this, ErrorDisplayActivity.class);
-            errorIntent.putExtra(Constants.errorDisplayMessageKey, "Refresh token exists");
-            startActivity(errorIntent);
+            // Refresh token present, set recurring sync task
+            Intent syncIntent = new Intent(this, SyncScheduleActivity.class);
+            startActivity(syncIntent);
         }
         else {
             Intent intent = new Intent(this, LoginAuthorizationActivity.class);

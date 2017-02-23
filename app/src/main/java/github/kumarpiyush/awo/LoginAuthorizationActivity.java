@@ -8,6 +8,7 @@ import android.view.View;
 
 import github.kumarpiyush.awo.Helpers.OwaHelpers;
 
+// Authorizes app using OWA OAuth
 public class LoginAuthorizationActivity extends AppCompatActivity {
 
     @Override
