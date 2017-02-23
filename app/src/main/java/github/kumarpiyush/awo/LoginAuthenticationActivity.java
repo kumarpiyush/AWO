@@ -23,29 +23,31 @@ public class LoginAuthenticationActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        String refreshToken = getRefreshToken(getIntent().getData());
-        saveRefreshToken(refreshToken);
+        String refreshToken = null;
 
-        // Go back to home page
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        startActivity(mainIntent);
-    }
-
-    private String getRefreshToken(Uri intentData) {
         try {
-            String authorizationCode = intentData.getQueryParameter("code");
-            AuthenticationResponse response = OwaHelpers.authenticateAndGetRefreshToken(authorizationCode,
-                    new AppCredentials(Constants.Owa.clientId, getString(R.string.app_secret)));
-            return response.refreshToken;
+            refreshToken = getRefreshToken(getIntent().getData());
         }
         catch (Exception e) {
             Intent errorIntent = new Intent(this, ErrorDisplayActivity.class);
             errorIntent.putExtra(Constants.errorDisplayMessageKey, e.toString());
 
             startActivity(errorIntent);
-
-            return null;
         }
+
+        if (refreshToken != null) {
+            saveRefreshToken(refreshToken);
+            // Go back to home page
+            Intent mainIntent = new Intent(this, MainActivity.class);
+            startActivity(mainIntent);
+        }
+    }
+
+    private String getRefreshToken(Uri intentData) throws Exception {
+        String authorizationCode = intentData.getQueryParameter("code");
+        AuthenticationResponse response = OwaHelpers.authenticateAndGetRefreshToken(authorizationCode,
+                new AppCredentials(Constants.Owa.clientId, getString(R.string.app_secret)));
+        return response.refreshToken;
     }
 
     private void saveRefreshToken(String refreshToken) {
