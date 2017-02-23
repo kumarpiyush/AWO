@@ -27,7 +27,7 @@ public class LoginAuthorizationActivity extends AppCompatActivity {
             startActivity(intent);
         }
         catch (Exception e) {
-            Intent errorIntent = new Intent(this, ErrorDisplayActivity.class);
+            Intent errorIntent = new Intent(this, DebugActivity.class);
             errorIntent.putExtra(Constants.errorDisplayMessageKey, e.toString());
 
             startActivity(errorIntent);

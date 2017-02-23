@@ -30,7 +30,7 @@ public class LoginAuthenticationActivity extends AppCompatActivity {
             refreshToken = getRefreshToken(getIntent().getData());
         }
         catch (Exception e) {
-            Intent errorIntent = new Intent(this, ErrorDisplayActivity.class);
+            Intent errorIntent = new Intent(this, DebugActivity.class);
             errorIntent.putExtra(Constants.errorDisplayMessageKey, e.toString());
 
             startActivity(errorIntent);
@@ -58,7 +58,7 @@ public class LoginAuthenticationActivity extends AppCompatActivity {
             manager.addAccountExplicitly(account, refreshToken, null);
         }
         catch (Exception e) {
-            Intent errorIntent = new Intent(this, ErrorDisplayActivity.class);
+            Intent errorIntent = new Intent(this, DebugActivity.class);
             errorIntent.putExtra(Constants.errorDisplayMessageKey, e.toString());
 
             startActivity(errorIntent);

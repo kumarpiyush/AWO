@@ -32,7 +32,7 @@
                 <data android:pathPattern="/awo/.*"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ErrorDisplayActivity">
+        <activity android:name=".DebugActivity">
         </activity>
 
         <service android:name=".AccountService">

@@ -12,7 +12,7 @@ public class SyncEventReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent errorIntent = new Intent(context, ErrorDisplayActivity.class);
+        Intent errorIntent = new Intent(context, DebugActivity.class);
         errorIntent.putExtra(Constants.errorDisplayMessageKey, "intent called " + new Date());
         errorIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
