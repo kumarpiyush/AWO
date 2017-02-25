@@ -17,7 +17,7 @@ public class SyncScheduleActivity extends AppCompatActivity {
 
         AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, SyncEventReceiver.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(this, (int) (System.currentTimeMillis() & 0xfffffff), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager.setInexactRepeating(
                 AlarmManager.RTC_WAKEUP,

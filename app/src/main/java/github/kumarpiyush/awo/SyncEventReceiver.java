@@ -4,7 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import java.util.Date;
+import github.kumarpiyush.awo.Sync.SyncComponentFactory;
+import github.kumarpiyush.awo.Sync.ISyncComponent;
 
 public class SyncEventReceiver extends BroadcastReceiver {
     public SyncEventReceiver() {
@@ -12,10 +13,10 @@ public class SyncEventReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent errorIntent = new Intent(context, DebugActivity.class);
-        errorIntent.putExtra(Constants.errorDisplayMessageKey, "intent called " + new Date());
-        errorIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        context.startActivity(errorIntent);
+        ISyncComponent[] activeComponents = SyncComponentFactory.getActiveComponents(context);
+        for (ISyncComponent comp : activeComponents) {
+            comp.updateState();
+            comp.notifyChanges();
+        }
     }
 }
