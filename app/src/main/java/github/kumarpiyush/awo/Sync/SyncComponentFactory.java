@@ -5,7 +5,7 @@ import android.content.Context;
 public class SyncComponentFactory {
     public static ISyncComponent[] getActiveComponents(Context context) {
         return new ISyncComponent[]{
-                new TestComponent(context)
+                new MailComponent(context)
         };
     }
 }

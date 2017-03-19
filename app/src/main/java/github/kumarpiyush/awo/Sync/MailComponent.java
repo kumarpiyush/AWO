@@ -1,42 +1,46 @@
 package github.kumarpiyush.awo.Sync;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.StrictMode;
 import android.support.v4.app.NotificationCompat;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Date;
-
-import github.kumarpiyush.awo.Helpers.ConnectionHelpers;
+import github.kumarpiyush.awo.Constants;
+import github.kumarpiyush.awo.Contracts.AppCredentials;
+import github.kumarpiyush.awo.Helpers.OwaHelpers;
 import github.kumarpiyush.awo.R;
 
-class TestComponent implements ISyncComponent {
+class MailComponent implements ISyncComponent {
     private Context context;
-    private String data;
+    private String accessToken;
 
-    TestComponent(Context context) {
+    MailComponent(Context context) {
         this.context = context;
     }
 
     @Override
     public boolean updateState() {
+        AccountManager manager = AccountManager.get(context);
+        final Account account = new Account("AWO user", Constants.accountType);
+        String refreshToken = manager.getPassword(account);
+
         try {
             // TODO : do network call in async mode
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
-            URL timeTeller = new URL("http://192.168.1.33:8080");
-            HttpURLConnection con = (HttpURLConnection) timeTeller.openConnection();
-            con.connect();
-            data = ConnectionHelpers.getConnectionResponse(con);
-
-            return true;
+            accessToken = OwaHelpers.getAuthTokensFromGrantToken(
+                    OwaHelpers.GrantType.refreshToken,
+                    refreshToken,
+                    new AppCredentials(Constants.Owa.clientId, this.context.getString(R.string.app_secret))).accessToken;
         }
         catch (Exception e) {
             return false;
         }
+
+        return true;
     }
 
     @Override
@@ -44,8 +48,8 @@ class TestComponent implements ISyncComponent {
         NotificationCompat.Builder nBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("Time update")
-                        .setContentText(data);
+                        .setContentTitle("Access token")
+                        .setContentText(accessToken);
 
         NotificationManager nManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         nManager.notify((int) (System.currentTimeMillis() & 0xfffffff), nBuilder.build());

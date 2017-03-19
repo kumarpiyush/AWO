@@ -2,7 +2,7 @@ package github.kumarpiyush.awo;
 
 public class Constants {
     static final String errorDisplayMessageKey = "ErrorDisplayMessage";
-    static final String accountType = "github.kumarpiyush.awo";
+    public static final String accountType = "github.kumarpiyush.awo";
 
     public class Owa {
         public static final String clientId = "0dfbbbca-335f-4e58-8e23-d3d0d8281b72";
@@ -15,6 +15,6 @@ public class Constants {
     }
 
     class Sync {
-        static final long syncIntervalInMilliseconds = 15 * 60 * 1000;
+        static final long syncIntervalInMilliseconds = 15 * 60 * 1000; // 15 minutes
     }
 }

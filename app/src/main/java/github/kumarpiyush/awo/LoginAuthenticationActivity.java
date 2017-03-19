@@ -46,8 +46,12 @@ public class LoginAuthenticationActivity extends AppCompatActivity {
 
     private String getRefreshToken(Uri intentData) throws Exception {
         String authorizationCode = intentData.getQueryParameter("code");
-        AuthenticationResponse response = OwaHelpers.authenticateAndGetRefreshToken(authorizationCode,
+
+        AuthenticationResponse response = OwaHelpers.getAuthTokensFromGrantToken(
+                OwaHelpers.GrantType.authCode,
+                authorizationCode,
                 new AppCredentials(Constants.Owa.clientId, getString(R.string.app_secret)));
+
         return response.refreshToken;
     }
 
